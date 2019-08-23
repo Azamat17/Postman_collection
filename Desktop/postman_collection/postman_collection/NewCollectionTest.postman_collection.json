@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "8122657e-c9d3-41e1-99ff-b3528eddf5f9",
+		"name": "NewCollectionTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST request Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0dec4e0e-a904-4841-a116-12dda9f2146b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const test=pm.response.json();",
+							"",
+							"pm.test(\"FirstName is Displayed\", function(){",
+							"pm.expect(test.firstName).to.eql(\"Tom\");",
+							"})",
+							"",
+							"pm.test(\"Phone is Displayed\", function(){",
+							"pm.expect(test.phone).to.eql(\"(439) 873-9876 x7087\");",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"firstName\": \"Tom\",\n            \"lastName\": \"Hardy\",\n            \"emailAddress\": \"tom@gmail.com\",\n            \"joinDate\": \"01/12/2019\",\n            \"password\": \"x2btzg0zz3\",\n            \"phone\": \"(439) 873-9876 x7087\",\n            \"subject\": \"Associate Degree in Communications\",\n            \"gender\": \"male\",\n            \"department\": \"Northern Sauer\",\n            \"birthDate\": \"03/14/1975\",\n            \"salary\": 8998000,\n            \"batch\": 10,\n            \"section\": \"Cross-group\",\n            \"premanentAddress\": \"390 Shaunna Manors, Guillermomouth, AR 49262-3520\"\n        }"
+				},
+				"url": {
+					"raw": "{{url}}/teacher/create",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"teacher",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3b87aa0-7cbb-4bbd-bec2-cd37782869d4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var schema=",
+							"{",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"teachers\": {",
+							"      \"type\": \"array\",",
+							"      \"items\": [",
+							"        {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"teacherId\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"firstName\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"lastName\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"emailAddress\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"joinDate\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"password\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"phone\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"subject\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"gender\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"department\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"birthDate\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"salary\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"batch\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"section\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"premanentAddress\": {",
+							"              \"type\": \"string\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"teacherId\",",
+							"            \"firstName\",",
+							"            \"lastName\",",
+							"            \"emailAddress\",",
+							"            \"joinDate\",",
+							"            \"password\",",
+							"            \"phone\",",
+							"            \"subject\",",
+							"            \"gender\",",
+							"            \"department\",",
+							"            \"birthDate\",",
+							"            \"salary\",",
+							"            \"batch\",",
+							"            \"section\",",
+							"            \"premanentAddress\"",
+							"          ]",
+							"        }",
+							"      ]",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"teachers\"",
+							"  ]",
+							"}",
+							";",
+							"",
+							"var response=JSON.parse(responseBody);",
+							"tests[\"Schema is Valid\"]=tv4.validate(response, schema);",
+							"console.log(tv4.error);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.cybertektraining.com/teacher/{{teacherID}}",
+					"protocol": "http",
+					"host": [
+						"api",
+						"cybertektraining",
+						"com"
+					],
+					"path": [
+						"teacher",
+						"{{teacherID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
